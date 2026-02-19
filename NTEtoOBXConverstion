@@ -1,0 +1,39 @@
+Class Hospital.NTEtoOBXConverstion Extends Ens.DataTransformDTL [ DependsOn = EnsLib.HL7.Message ]
+{
+
+Parameter GENERATEEMPTYSEGMENTS = 0;
+
+Parameter IGNOREMISSINGSOURCE = 1;
+
+Parameter REPORTERRORS = 1;
+
+Parameter TREATEMPTYREPEATINGFIELDASNULL = 0;
+
+XData DTL [ XMLNamespace = "http://www.intersystems.com/dtl" ]
+{
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='2.3.1:ORU_R01' targetDocType='2.3.1:ORU_R01' create='new' language='objectscript' >
+<assign value='source.{MSH}' property='target.{MSH}' action='set' />
+<assign value='source.{PIDgrpgrp()}' property='target.{PIDgrpgrp()}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp}' property='target.{PIDgrpgrp().PIDgrp}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp.PID}' property='target.{PIDgrpgrp().PIDgrp.PID}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp.PD1}' property='target.{PIDgrpgrp().PIDgrp.PD1}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp.NK1()}' property='target.{PIDgrpgrp().PIDgrp.NK1()}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp.NTE()}' property='target.{PIDgrpgrp().PIDgrp.NTE()}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp.PV1grp}' property='target.{PIDgrpgrp().PIDgrp.PV1grp}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp.PV1grp.PV1}' property='target.{PIDgrpgrp().PIDgrp.PV1grp.PV1}' action='set' />
+<assign value='source.{PIDgrpgrp().PIDgrp.PV1grp.PV2}' property='target.{PIDgrpgrp().PIDgrp.PV1grp.PV2}' action='set' />
+<assign value='source.{PIDgrpgrp().ORCgrp()}' property='target.{PIDgrpgrp().ORCgrp()}' action='set' />
+<assign value='source.{PIDgrpgrp().ORCgrp().ORC}' property='target.{PIDgrpgrp().ORCgrp().ORC}' action='set' />
+<assign value='source.{PIDgrpgrp().ORCgrp().OBR}' property='target.{PIDgrpgrp().ORCgrp().OBR}' action='set' />
+<comment>
+<annotation>Transform NTE segments into OBX segments</annotation>
+</comment>
+<assign value='source.{PIDgrpgrp().ORCgrp().NTE()}' property='target.{PIDgrpgrp().ORCgrp().NTE()}' action='set' />
+<assign value='source.{PIDgrpgrp().ORCgrp().OBXgrp()}' property='target.{PIDgrpgrp().ORCgrp().OBXgrp()}' action='set' />
+<assign value='source.{PIDgrpgrp().ORCgrp().CTI()}' property='target.{PIDgrpgrp().ORCgrp().CTI()}' action='set' />
+<assign value='source.{PIDgrpgrp().ORCgrp().OBXgrp().NTE()}' property='target.{PIDgrpgrp().ORCgrp().OBXgrp().OBX}' action='set' />
+<assign value='source.{DSC}' property='target.{DSC}' action='set' />
+</transform>
+}
+
+}
